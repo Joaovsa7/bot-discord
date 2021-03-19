@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Discord = require('discord.js');
 const { token, prefix } = require('./config/config');
 const commands = require('./commands/index')

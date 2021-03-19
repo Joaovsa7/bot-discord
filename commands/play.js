@@ -43,7 +43,7 @@ module.exports = async (message) => {
 
   if (serverQueue) {
     serverQueue.songs.push(songInfo)
-    return message.channel.send(`${songInfo.title} has been added to the queue!`)
+    return message.channel.send(`${songInfo.title} foi adicionada a sua lista! para ver a lista, use o comando -queue`)
   }
 
   const queueContract = {
@@ -51,7 +51,7 @@ module.exports = async (message) => {
     voiceChannel,
     connection: await voiceChannel.join(),
     songs: [],
-    volume: 8,
+    volume: 5,
     playing: true
   }
 
