@@ -51,7 +51,7 @@ module.exports = async (message) => {
     voiceChannel,
     connection: await voiceChannel.join(),
     songs: [],
-    volume: 5,
+    volume: 0.5,
     playing: true
   }
 
