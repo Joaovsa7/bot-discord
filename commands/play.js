@@ -6,7 +6,7 @@ const playMusic = async (message, song) => {
   const guildId = message.guild.id
   const serverQueue = getQueue(guildId)
 
-  if (!song.url) {
+  if (!song?.url) {
     serverQueue.voiceChannel.leave()
     deleteSong(guildId)
     return message.channel.send(`${message.author.username}, música inválida.`)
@@ -16,7 +16,9 @@ const playMusic = async (message, song) => {
     .play(await ytdl(song.url), { type: "opus" })
     .on('finish', () => {
       serverQueue.songs.shift()
-      playMusic(message, serverQueue.songs[0])
+      if (serverQueue?.songs?.length > 0) {
+        return playMusic(message, serverQueue.songs[0])
+      }
     })
 
   streamDispatcher.setVolume(serverQueue.volume)
