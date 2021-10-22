@@ -2,13 +2,15 @@ const weatherApi = require("../config/axios")
 const { WEATHER_TOKEN } = require("../config/config")
 
 const REMOVE_SPECIAL_CHARACTERS = /[\u0300-\u036f]/g
+const NOT_FOUND = 'Oops! Não encontramos esta localização 😥 😥. Só consigo achar no planeta terra 🌎🌎 e olhe lá!'
+const COMMAND_SUGGESTION = 'Oops! Você passou o comando de um modo inválido! tenta assim: -weather {city name},{state code},{country code}'
 
 module.exports = async (message) => {
   const COMMAND = message.content.split(" ")[0]
   const weatherArgs = message.content.replace(COMMAND, '')
 
   if (!weatherArgs) {
-    return message.channel.send('Oops! Você passou o comando de um modo inválido! tenta assim: -weather {cidade/bairro (sem caracteres especiais)}')
+    return message.channel.send(COMMAND_SUGGESTION)
   }
   
   try {
@@ -36,6 +38,7 @@ module.exports = async (message) => {
     message.channel.send(`${message.author}, Agora em ${weatherArgs} está ${celsiusTemperature} e com a sensação térmica de ${feelsLike}°C. ${isHot ? '🥵🥵' : isCold ? '🥶🥶' : 'Está agradável! 😁😁'}`)
     return message.channel.send(`Anota aí a minha dica! ${suggestion}`)
   } catch (error) {
-    return message.channel.send('Oops! Não encontramos esta localização 😥 😥. Só consigo achar no planeta terra 🌎🌎 e olhe lá!')
+    message.channel.send(NOT_FOUND)
+    return message.channel.send(COMMAND_SUGGESTION)
   }
 }
