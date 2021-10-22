@@ -4,6 +4,7 @@ const queue = require('./queue')
 const skip = require('./skip')
 const hug = require('./hug')
 const bye = require('./bye')
+const weather = require('./weather') 
 
 module.exports = {
   '-hello': hello,
@@ -11,5 +12,6 @@ module.exports = {
   '-skip': skip,
   '-queue': queue,
   '-hug': hug,
-  '-bye': bye
+  '-bye': bye,
+  '-weather': weather
 }
